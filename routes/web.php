@@ -103,3 +103,8 @@ Route::middleware('auth')->group(function(){
 Route::get('user-login', function () {
     return Auth::user();
 });
+
+//Test user login
+Route::get('test', function () {
+    return '123';
+});

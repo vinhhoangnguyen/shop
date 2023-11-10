@@ -34,7 +34,7 @@ class RegisteredUserController extends Controller
         $request->validate([
             'username' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:255','unique:'.User::class],
-            'email' => ['max:255', 'unique:'.User::class],
+            // 'email' => ['max:255', 'unique:'.User::class],
             'new_password' => ['required', 'confirmed', 'min:8'],
             // 'new_password' => ['required', 'confirmed', Rules\Password::defaults()],
         ],[
@@ -43,7 +43,7 @@ class RegisteredUserController extends Controller
             'phone.required' => 'Số điện thoại không để trống',
             'phone.unique' => 'Số điện thoại đã được đăng ký',
 
-            'email.unique' => 'Email đã được đăng ký',
+            // 'email.unique' => 'Email đã được đăng ký',
             'new_password.required' => 'Mật khẩu mới không để trống',
             'new_password.min' => 'Mật khẩu mới ít nhất 8 ký tự',
             'new_password.confirmed' => 'Xác nhận mật khẩu mới chưa khớp.',

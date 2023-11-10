@@ -31,19 +31,16 @@
         <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
-                    <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-                    <span></span> Pages <span></span> My Account
+                    <a href="{{ route('home')}}" rel="nofollow"><i class="fi-rs-home mr-5"></i></a>
+                    <span></span> Đăng nhập
                 </div>
             </div>
         </div>
-        <div class="page-content pt-150 pb-150">
+        <div class="page-content pt-100 pb-100">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-8 col-lg-10 col-md-12 m-auto">
                         <div class="row">
-                            <div class="col-lg-6 pr-30 d-none d-lg-block">
-                                <img class="border-radius-15" src="{{ asset('frontend/assets/imgs/page/login-1.png') }}" alt="" />
-                            </div>
                             <div class="col-lg-6 col-md-8">
                                 <div class="login_wrap widget-taber-content background-white">
                                     <div class="padding_eight_all bg-white">
@@ -81,6 +78,23 @@
                                             </div>
                                         </form>
                                     </div>
+                                </div>
+                            </div>
+                            {{-- <div class="col-lg-6 pr-30 d-none d-lg-block">      --}}
+                            <div class="col-lg-6 pr-30 col-md-4">     
+                                <div class="card-login mt-115">
+                                    <a href="#" class="social-login facebook-login">
+                                        <img src="{{asset('frontend/assets/imgs/theme/icons/logo-facebook.svg')}}" alt="" />
+                                        <span>Tiếp tục với Facebook</span>
+                                    </a>
+                                    <a href="#" class="social-login google-login">
+                                        <img src="{{asset('frontend/assets/imgs/theme/icons/logo-google.svg')}}" alt="" />
+                                        <span>Tiếp tục với Google</span>
+                                    </a>
+                                    <a href="#" class="social-login apple-login">
+                                        <img src="{{asset('frontend/assets/imgs/theme/icons/logo-apple.svg')}}" alt="" />
+                                        <span>Tiếp tục với Apple</span>
+                                    </a>
                                 </div>
                             </div>
                         </div>

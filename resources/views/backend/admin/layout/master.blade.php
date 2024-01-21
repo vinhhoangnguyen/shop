@@ -489,9 +489,10 @@
         <script src="{{ asset('backend/assets/js/validate.min.js') }}"></script>
 
 
-        {{-- Toastr JS --}}
+        {{-- Toastr JS - Sweet Alert JS --}}
 
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <script>
             @if(Session::has('message'))
@@ -514,6 +515,56 @@
                     break;
                 }
             @endif
+        </script>
+
+        <script>
+            document.addEventListener('alert', (event) => {
+                // alert(event['detail'][0]['message']);
+                const alert_type = event['detail'][0]['alert-type'];
+                const message = event['detail'][0]['message'];
+                switch (alert_type) {
+                    case "success":
+                        Swal.fire({
+                            position: "top-end",
+                            icon: alert_type,
+                            title: message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        break;
+
+                    case "error":
+                        Swal.fire({
+                            position: "top-end",
+                            icon: alert_type,
+                            title: message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        break;
+
+                    case "delete":
+                        Swal.fire({
+                            title: "Bạn có chắc chắn muốn xoá?",
+                            // text: "You won't be able to revert this!",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#3085d6",
+                            cancelButtonColor: "#d33",
+                            confirmButtonText: "Vâng, xoá!"
+                            }).then((result) => {
+                            if (result.isConfirmed) {
+                                Swal.fire({
+                                title: "Xoá thành công!",
+                                text: "Dữ liệu bạn chọn đã được xoá.",
+                                icon: "success"
+                                });
+                            }
+                        });
+                        break;
+                }
+
+            });
         </script>
 
 

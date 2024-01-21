@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\ManagerController;
 use App\Http\Controllers\Frontend\CustomerController;
 use App\Http\Controllers\Backend\VendorController;
+use App\Http\Controllers\Backend\PosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +54,7 @@ Route::get('manager/login',[ManagerController::class, 'login'])->name('manager.l
 //Login/Register User.....làm sau
 Route::get('/account',[CustomerController::class, 'account'])->name('guest.account');
 
+
 Route::middleware('auth')->group(function(){
 
     //Route Admin
@@ -67,8 +69,11 @@ Route::middleware('auth')->group(function(){
             Route::get('/admin/lock',  'Admin_lock')->name('admin.lock');
             Route::post('/admin/unlock',  'Admin_Unlock')->name('admin.unlock');
             Route::get('/admin/logout',  'Admin_Destroy')->name('admin.logout');
+        });
 
-
+        // Router POS
+        Route::controller(PosController::class)->group(function () {
+            Route::get('admin/pos/setting', 'setting')->name('admin.pos.setting');
         });
     });
 

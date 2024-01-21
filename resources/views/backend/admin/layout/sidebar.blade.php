@@ -67,9 +67,15 @@
                     </div> --}}
                 </li>
 
+                {{-- Thông tin Shop --}}
+                <li>
+                    <a href="{{ route('admin.pos.setting') }}" >
+                        <i class="mdi mdi-cart-outline"></i>
+                        <span> Thông tin shop </span>
+                        <span class="menu-arrow"></span>
+                    </a>
 
-
-
+                </li>
                 <li>
                     <a href="#sidebarEcommerce" data-bs-toggle="collapse">
                         <i class="mdi mdi-cart-outline"></i>

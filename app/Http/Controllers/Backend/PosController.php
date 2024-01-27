@@ -9,7 +9,12 @@ class PosController extends Controller
 {
     //Setting_Thông tin shop
     public function setting(){
-        // dd('setting');
         return view('backend.admin.pos.setting');
+    }
+
+    //Setting_Thông tin shop
+    public function category(){
+        // dd("Category");
+        return view('backend.admin.pos.category');
     }
 }

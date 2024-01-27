@@ -76,6 +76,22 @@
                     </a>
 
                 </li>
+
+                <li>
+                    <a href="#sidebarPOS" data-bs-toggle="collapse">
+                        <i class="mdi mdi-cart-outline"></i>
+                        <span> POS </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarPOS">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('admin.pos.category') }}">Danh mục sản phẩm</a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </li>
                 <li>
                     <a href="#sidebarEcommerce" data-bs-toggle="collapse">
                         <i class="mdi mdi-cart-outline"></i>

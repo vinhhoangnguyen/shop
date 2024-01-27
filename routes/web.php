@@ -74,6 +74,8 @@ Route::middleware('auth')->group(function(){
         // Router POS
         Route::controller(PosController::class)->group(function () {
             Route::get('admin/pos/setting', 'setting')->name('admin.pos.setting');
+            Route::get('admin/pos/category', 'category')->name('admin.pos.category');
+
         });
     });
 

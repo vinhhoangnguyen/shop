@@ -27,25 +27,24 @@
                             <form class="d-flex flex-wrap align-items-center">
                                 <label for="inputPassword2" class="visually-hidden">Tìm kiếm</label>
                                 <div class="me-3">
-                                    <input wire:model.live="search" type="search" class="form-control my-1 my-lg-0" id="inputPassword2" placeholder="Tìm...">
+                                    <input wire:model.live.debounce.800ms="search" type="search" class="form-control my-1 my-lg-0" placeholder="Tìm...">
                                 </div>
 
-                                <label for="status-select" class="me-2">Trình bày</label>
+                                <label for="status-select" class="me-2">Trình bày </label>
                                 <div class="me-sm-3">
-                                    <select class="form-select form-select my-1 my-lg-0" id="status-select">
-                                        <option value="5" selected>5</option>
+                                    <select wire:model.live="pagination" class="form-select form-select my-1 my-lg-0" id="status-select">
+                                        <option value="5">5</option>
                                         <option value="10">10</option>
-                                        <option value="10">20</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
                                     </select>
                                 </div>
 
                                 <label for="status-select" class="me-2">Sắp xếp</label>
                                 <div class="me-sm-3">
-                                    <select class="form-select form-select my-1 my-lg-0" id="status-select">
-                                        <option selected>Tất cả</option>
+                                    <select wire:model.live="sort" class="form-select form-select my-1 my-lg-0" id="status-select">
                                         <option value="name">Tên</option>
                                         <option value="status">Trạng thái</option>
-
                                     </select>
                                 </div>
 

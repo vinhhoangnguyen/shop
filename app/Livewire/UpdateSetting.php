@@ -61,7 +61,6 @@ class UpdateSetting extends Component
         ];
     }
 
-
     public function render()
     {
         return view('livewire.update-setting');
@@ -106,7 +105,6 @@ class UpdateSetting extends Component
         }
 
         $this->dispatch('alert', $notification);
-
     }
 
 }

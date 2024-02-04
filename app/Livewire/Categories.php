@@ -11,11 +11,12 @@ class Categories extends Component
     use WithPagination;
 
     public $search;
-    public $pagination = 5;
+    public $pagination = 2;
     public $sort = 'name';
 
     public function render()
     {
+        // sleep(5);
         return view('livewire.categories', [
             'data' => Category::where('name', 'like', '%' .$this->search. '%')
                                 ->orderBy($this->sort, 'DESC')

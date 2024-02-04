@@ -33,7 +33,7 @@
                                 <label for="status-select" class="me-2">Trình bày </label>
                                 <div class="me-sm-3">
                                     <select wire:model.live="pagination" class="form-select form-select my-1 my-lg-0" id="status-select">
-                                        <option value="5">5</option>
+                                        <option value="2">2</option>
                                         <option value="10">10</option>
                                         <option value="20">20</option>
                                         <option value="30">30</option>
@@ -59,9 +59,13 @@
                         </div><!-- end col-->
                     </div>
 
+                   
                     <div class="table-responsive">
 
                         {{-- @dump($data) --}}
+                        <div wire:loading class="spinner-border" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
 
                         @if (count($data) > 0)
                         <table class="table table-centered table-striped dt-responsive nowrap w-100" id="products-datatable">
@@ -112,6 +116,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                       Tổng: {{number_format($data->total(), 0,',','.')}} mục.
                         {{ $data->links() }}
                         @else
                             <span class="text-danger">Không có dữ liệu</span>

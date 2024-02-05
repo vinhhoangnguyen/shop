@@ -59,12 +59,18 @@
                         </div><!-- end col-->
                     </div>
 
-                   
-                    <div class="table-responsive">
+
+                    <div class="table-responsive position-relative">
 
                         {{-- @dump($data) --}}
-                        <div wire:loading class="spinner-border" role="status">
-                            <span class="visually-hidden">Loading...</span>
+
+                        {{-- Lớp phủ khi Slow Data --}}
+                        <div wire:loading class="position-absolute top-0 start-0 w-100 h-100 bg-white opacity-50">
+                        </div>
+                        <div wire:loading class="position-absolute top-50 start-50 translate-middle">
+                            <div class="spinner-border text-secondary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
                         </div>
 
                         @if (count($data) > 0)

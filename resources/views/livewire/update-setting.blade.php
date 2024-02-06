@@ -17,6 +17,25 @@
                     </div>
         </div>
         <!-- end page title -->
+
+{{-- Test Alpine --}}
+{{-- <div class="row">
+            <div>
+                <h1>{{ $setting->name }}</h1>
+             
+                <div x-data="{ expanded: false }">
+                    <button type="button" x-on:click="expanded = ! expanded">
+                        <span x-show="! expanded">Show post content...</span>
+                        <span x-show="expanded">Hide post content...</span>
+                    </button>
+             
+                    <div x-show="expanded">
+                        {{ $setting->phone }}
+                    </div>
+                </div>
+            </div>
+</div> --}}
+
         <form wire:submit.prevent="update" class="row">
                     <div class="col-lg-6">
                         <div class="card">
@@ -150,8 +169,12 @@
                     </div> <!-- end col-->
 
                     <div class="col-12">
-                        <div class=" mb-3">
-                            <button type="submit" class="btn w-sm btn-success waves-effect waves-light">Cập nhật</button>
+                        <div class="mb-3">
+                            <button type="submit" class="btn w-sm btn-success waves-effect waves-light">Cập nhật
+                                <div wire:loading wire:target="update" class="spinner-border text-secondary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </button>
                         </div>
                     </div> <!-- end col -->
         </form>

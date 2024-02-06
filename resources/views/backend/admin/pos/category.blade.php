@@ -3,6 +3,6 @@
 <div class="content">
     <!-- Start Content-->
     {{-- Livewire_content --}}
-    <livewire:categories />
+    <livewire:category.show-category />
 </div> <!-- content -->
 @endsection

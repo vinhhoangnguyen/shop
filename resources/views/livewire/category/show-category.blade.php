@@ -27,7 +27,7 @@
                             <form class="d-flex flex-wrap align-items-center">
                                 <label for="inputPassword2" class="visually-hidden">Tìm kiếm</label>
                                 <div class="me-3">
-                                    <input wire:model.live.debounce.800ms="search" type="search" class="form-control my-1 my-lg-0" placeholder="Tìm...">
+                                    <input wire:model.live.debounce.500ms="search" type="search" class="form-control my-1 my-lg-0" placeholder="Tìm...">
                                 </div>
 
                                 <label for="status-select" class="me-2">Trình bày </label>
@@ -92,7 +92,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($data as $key => $item)
-                                    <tr>
+                                    <tr wire:key="{{ $item->id }}">
                                         <td>
                                             <div class="form-check">
                                                 <input type="checkbox" class="form-check-input" id="customCheck2">
@@ -122,7 +122,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                       Tổng: {{number_format($data->total(), 0,',','.')}} mục.
+                       Kết quả: {{number_format($data->total(), 0,',','.')}} mục.
                         {{ $data->links() }}
                         @else
                             <span class="text-danger">Không có dữ liệu</span>

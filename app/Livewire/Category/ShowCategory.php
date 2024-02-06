@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Category;
 
 use Livewire\Component;
 use App\Models\Category;
 use Livewire\WithPagination;
 
-class Categories extends Component
+class ShowCategory extends Component
 {
     use WithPagination;
 
@@ -14,18 +14,17 @@ class Categories extends Component
     public $pagination = 2;
     public $sort = 'name';
 
+    public function updatedSearch()
+    {
+        $this->resetPage();
+    }
+
     public function render()
     {
-        // sleep(5);
-        return view('livewire.categories', [
+        return view('livewire.category.show-category', [
             'data' => Category::where('name', 'like', '%' .$this->search. '%')
                                 ->orderBy($this->sort, 'DESC')
                                 ->paginate($this->pagination),
         ]);
-    }
-
-    public function updatingSearch()
-    {
-        $this->resetPage();
     }
 }

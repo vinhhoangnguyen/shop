@@ -40,10 +40,10 @@
                                     </select>
                                 </div>
 
-                                @if (count($selectedIds) > 0)
-                                    <label for="status-select" class="me-2">muc chon: </label>
+                                @if (count($selectedIDs) > 0)
+                                    <label for="status-select" class="me-2">Mục chọn: </label>
                                     <div class="me-sm-3">
-                                        {{count($selectedIds)}}
+                                        {{count($selectedIDs)}}
                                     </div>
                                 @endif
 
@@ -80,11 +80,11 @@
                                 <tr>
                                     <th style="width: 100px;">
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="customCheck1">
-                                            <label  class="form-check-label" for="customCheck1">
+                                            <input type="checkbox" wire:model.live="selectPageRows" class="form-check-input" id="customCheckAll">
+                                            <label  class="form-check-label" for="customCheckAll">
                                                 <span>STT
                                                 </span>
-                                                @json($selectedIds)
+                                            
                                             </label>
                                         </div>
                                     </th>
@@ -121,8 +121,8 @@
                                     <tr wire:key="{{ $item->id }}">
                                         <td>
                                             <div class="form-check">
-                                                <input type="checkbox" wire:model.live="selectedIds" value="{{$item->id}}" class="form-check-input" id="customCheck2">
-                                                <label class="form-check-label" for="customCheck2">{{ $key+ $data->firstItem()}} </label>
+                                                <input type="checkbox" wire:model.live="selectedIDs" value="{{$item->id}}" class="form-check-input" id="customCheckID">
+                                                <label class="form-check-label" for="customCheckID">{{ $key+ $data->firstItem()}} </label>
                                             </div>
                                         </td>
                                         <td>{{ $item->id }}</td>
@@ -154,6 +154,7 @@
                             <span class="text-danger">Không có dữ liệu</span>
                         @endif
 
+                        @dump($selectedIDs)
                     </div>
                 </div> <!-- end card-body-->
             </div> <!-- end card-->

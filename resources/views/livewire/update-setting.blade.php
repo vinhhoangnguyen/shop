@@ -22,13 +22,13 @@
 {{-- <div class="row">
             <div>
                 <h1>{{ $setting->name }}</h1>
-             
+
                 <div x-data="{ expanded: false }">
                     <button type="button" x-on:click="expanded = ! expanded">
                         <span x-show="! expanded">Show post content...</span>
                         <span x-show="expanded">Hide post content...</span>
                     </button>
-             
+
                     <div x-show="expanded">
                         {{ $setting->phone }}
                     </div>
@@ -43,7 +43,7 @@
                                 <h5 class="text-uppercase bg-light p-2 mt-0 mb-3">Thông tin chung</h5>
 
                                 <div class="mb-3">
-                                    <label for="shop-name" class="form-label">Tên <span class="text-danger">*</span></label>
+                                    <label for="shop-name" class="form-label">Tên <span class="text-danger opacity-75 opacity-75">*</span></label>
                                     <input type="text" wire:model.blur="name" class="form-control @error('name') is-invalid @enderror" placeholder="Tên shop" >
                                     @error('name')
                                         <span class="text-danger">{{ $message }}</span>
@@ -51,7 +51,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="shop-address" class="form-label">Địa chỉ <span class="text-danger">*</span></label>
+                                    <label for="shop-address" class="form-label">Địa chỉ <span class="text-danger opacity-75">*</span></label>
                                     <textarea wire:model.blur="address" class="form-control @error('address') is-invalid @enderror" id="shop-address" rows="3" placeholder="Địa chỉ shop"></textarea>
                                     @error('address')
                                         <span class="text-danger">{{ $message }}</span>
@@ -60,7 +60,7 @@
 
 
                                 <div class="mb-3">
-                                    <label for="shop-phone">Số điện thoại <span class="text-danger">*</span></label>
+                                    <label for="shop-phone">Số điện thoại <span class="text-danger opacity-75">*</span></label>
                                     <input type="text" wire:model.blur="phone" class="form-control @error('phone') is-invalid @enderror" id="shop-phone" placeholder="Số điện thoại">
                                     @error('phone')
                                         <span class="text-danger">{{ $message }}</span>
@@ -69,7 +69,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="shop-hot_line">Đường dây nóng <span class="text-danger">*</span></label>
+                                    <label for="shop-hot_line">Đường dây nóng <span class="text-danger opacity-75">*</span></label>
                                     <input type="text" wire:model.blur="hot_line" class="form-control @error('hot_line') is-invalid @enderror" id="shop-hot_line" placeholder="Đường dây nóng">
                                     @error('hot_line')
                                         <span class="text-danger">{{ $message }}</span>
@@ -93,7 +93,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">Tài Khoản <span class="text-danger">*</span></label>
+                                    <label class="form-label">Tài Khoản <span class="text-danger opacity-75">*</span></label>
                                     <textarea wire:model.blur="account" class="form-control @error('account') is-invalid @enderror" rows="5" placeholder="Tài khoản ngân hàng"></textarea>
                                     @error('account')
                                         <span class="text-danger">{{ $message }}</span>
@@ -124,7 +124,7 @@
 
                                     <!-- Preview Image Logo-->
                                     <div class="mt-2">
-                                        @if ($logo)
+                                        @if ($logo && !$errors->has('logo'))
                                             <img src="{{ $logo->temporaryUrl() }}" style="width: 100px">
                                         @else
                                             <img src="{{ ($this->setting->logo) ? asset($this->setting->logo) : asset('backend/upload/no_image.jpg') }}" style="width: 100px">

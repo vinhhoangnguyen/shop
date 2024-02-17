@@ -32,7 +32,7 @@
 
                                 <label for="status-select" class="me-2">Trình bày </label>
                                 <div class="me-sm-3">
-                                    <select wire:model.live="pagination" class="form-select form-select my-1 my-lg-0" id="status-select">
+                                    <select wire:model.live="perPage" class="form-select form-select my-1 my-lg-0" id="status-select">
                                         <option value="2">2</option>
                                         <option value="10">10</option>
                                         <option value="20">20</option>
@@ -40,19 +40,20 @@
                                     </select>
                                 </div>
 
-                                <label for="status-select" class="me-2">Sắp xếp</label>
-                                <div class="me-sm-3">
-                                    <select wire:model.live="sort" class="form-select form-select my-1 my-lg-0" id="status-select">
-                                        <option value="name">Tên</option>
-                                        <option value="status">Trạng thái</option>
-                                    </select>
-                                </div>
+                                @if (count($selectedIds) > 0)
+                                    <label for="status-select" class="me-2">muc chon: </label>
+                                    <div class="me-sm-3">
+                                        {{count($selectedIds)}}
+                                    </div>
+                                @endif
+
 
                             </form>
                         </div>
                         <div class="col-lg-4">
                             <div class="text-lg-end">
-                                <button type="button" class="btn btn-danger waves-effect waves-light mb-2 me-2"><i class="mdi mdi-plus-circle me-1"></i> Thêm danh mục</button>
+                                <!-- Modal -->
+                                <button type="button" class="btn btn-info waves-effect waves-light mb-2 me-2" data-bs-toggle="modal" data-bs-target="#standard-modal"><i class="mdi mdi-plus-circle me-1"></i> Thêm danh mục</button>
                                 <button type="button" class="btn btn-light waves-effect mb-2">Nhập</button>
                                 <button type="button" class="btn btn-light waves-effect mb-2">Xuất</button>
                             </div>
@@ -77,16 +78,41 @@
                         <table class="table table-centered table-striped dt-responsive nowrap w-100" id="products-datatable">
                             <thead>
                                 <tr>
-                                    <th style="width: 20px;">
+                                    <th style="width: 100px;">
                                         <div class="form-check">
                                             <input type="checkbox" class="form-check-input" id="customCheck1">
-                                            <label class="form-check-label" for="customCheck1">&nbsp;</label>
+                                            <label  class="form-check-label" for="customCheck1">
+                                                <span>STT
+                                                </span>
+                                                @json($selectedIds)
+                                            </label>
                                         </div>
                                     </th>
-                                    <th>STT</th>
-                                    <th>Danh mục</th>
-                                    <th>Slug</th>
-                                    <th>Trạng thái</th>
+
+                                    <th class="p-1">
+                                        <x-datatable-items columnName="id" :sortColumn="$sortColumn" :sortDirect="$sortDirect">
+                                            <div>Mã</div>
+                                        </x-datatable-items>
+                                    </th>
+                                    <th class="p-1">
+                                        <x-datatable-items columnName="name" :sortColumn="$sortColumn" :sortDirect="$sortDirect">
+                                            <div>Danh mục</div>
+                                        </x-datatable-items>
+                                    </th>
+
+                                    <th class="p-1">
+                                        <x-datatable-items columnName="status" :sortColumn="$sortColumn" :sortDirect="$sortDirect">
+                                            <div>Trạng thái</div>
+                                        </x-datatable-items>
+                                    </th>
+
+                                    <th class="p-1">
+                                        <x-datatable-items columnName="created_at" :sortColumn="$sortColumn" :sortDirect="$sortDirect">
+                                            <div>Ngày tạo</div>
+                                        </x-datatable-items>
+                                    </th>
+
+
                                     <th style="width: 150px;">Thao tác</th>
                                 </tr>
                             </thead>
@@ -95,16 +121,15 @@
                                     <tr wire:key="{{ $item->id }}">
                                         <td>
                                             <div class="form-check">
-                                                <input type="checkbox" class="form-check-input" id="customCheck2">
-                                                <label class="form-check-label" for="customCheck2">ABC</label>
+                                                <input type="checkbox" wire:model.live="selectedIds" value="{{$item->id}}" class="form-check-input" id="customCheck2">
+                                                <label class="form-check-label" for="customCheck2">{{ $key+ $data->firstItem()}} </label>
                                             </div>
                                         </td>
-                                        <td>{{ $key+ $data->firstItem()}}</td>
+                                        <td>{{ $item->id }}</td>
                                         <td class="table-user">
-                                            <img src="assets/images/users/user-4.jpg" alt="table-user" class="me-2 rounded-circle">
+                                            <img src="{{ $item->image }}" alt="table-user" class="me-2 rounded-circle">
                                             <a href="javascript:void(0);" class="text-body fw-semibold">{{ $item->name }}</a>
                                         </td>
-                                        <td>{{ $item->slug }}</td>
                                         <td>
                                             @if ($item->status == 1)
                                                 <span class="badge badge-soft-success">Hoạt động</span>
@@ -113,6 +138,7 @@
                                             @endif
                                         </td>
 
+                                        <td>{{ $item->created_at }}</td>
                                         <td>
                                             <a href="javascript:void(0);" class="action-icon" title="Xem"> <i class="mdi mdi-eye"></i></a>
                                             <a href="javascript:void(0);" class="action-icon" title="Sửa"> <i class="mdi mdi-square-edit-outline"></i></a>
@@ -134,5 +160,38 @@
         </div> <!-- end col -->
     </div>
     <!-- end row -->
+
+    <!-- Standard Modal content -->
+    <div id="standard-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="standard-modalLabel">Thêm danh mục</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <form action="#" class="px-3">
+
+                        <div class="mb-3">
+                            <label for="emailaddress1" class="form-label">Email address</label>
+                            <input class="form-control" type="email" id="emailaddress1" required="" placeholder="john@deo.com">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password1" class="form-label">Password</label>
+                            <input class="form-control" type="password" required="" id="password1" placeholder="Enter your password">
+                        </div>
+
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary">Lưu</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
 </div> <!-- container -->

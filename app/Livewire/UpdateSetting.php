@@ -42,7 +42,8 @@ class UpdateSetting extends Component
             'account' =>'required',
             'time' =>'required',
             'email' =>'nullable|email',
-            'logo' =>'nullable|image|max:2048',
+            'logo' =>'nullable|image|max:12288',
+            // 'logo' =>'image|max:2048',
         ];
 
     }
@@ -57,7 +58,7 @@ class UpdateSetting extends Component
             'time.required' =>'Thời gian làm việc shop không để trống',
             'email.email' =>'Thư điện tử phải là dạng email',
             'logo.image' =>'File logo Shop dạng hình ảnh',
-            'logo.max' =>'Chọn file logo Shop có kích thước nhỏ hơn 2Mb',
+            'logo.max' =>'Chọn file logo Shop có kích thước nhỏ hơn 12Mb',
         ];
     }
 
@@ -95,6 +96,7 @@ class UpdateSetting extends Component
             $notification = array(
                 'message' => 'Thông tin shop đã được cập nhật!',
                 'alert-type' => 'success'
+
             );
 
         } catch (\Throwable $th) {

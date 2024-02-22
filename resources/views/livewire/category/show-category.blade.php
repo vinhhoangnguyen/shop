@@ -33,18 +33,28 @@
                                 <label for="status-select" class="me-2">Trình bày </label>
                                 <div class="me-sm-3">
                                     <select wire:model.live="perPage" class="form-select form-select my-1 my-lg-0" id="status-select">
-                                        <option value="2">2</option>
+                                        <option value="5">5</option>
                                         <option value="10">10</option>
                                         <option value="20">20</option>
                                         <option value="30">30</option>
+                                        <option value="50">50</option>
                                     </select>
                                 </div>
 
                                 @if (count($selectedIDs) > 0)
-                                    <label for="status-select" class="me-2">Mục chọn: </label>
-                                    <div class="me-sm-3">
-                                        {{count($selectedIDs)}}
+                                <div class="d-flex gap-2 align-items-center">
+
+                                    <label for="status-select" class="">Mục chọn: </label>
+                                    <div class="me-sm-2">
+                                        {{count($selectedIDs)}} mục.
                                     </div>
+
+                                    <div class="vr"></div>
+                                    <button wire:click.prevent="deleteMultiID" type="button" class="btn btn-danger waves-effect waves-light" title="Xoá">
+                                        <span class="btn-label"><i class="mdi mdi-delete"></i></span>{{count($selectedIDs)}}
+                                    </button>
+                                </div>
+                                    
                                 @endif
 
 
@@ -138,7 +148,7 @@
                                             @endif
                                         </td>
 
-                                        <td>{{ $item->created_at }}</td>
+                                        <td>{{ date('d-m-Y g:i', strtoTime($item->created_at))  }}</td>
                                         <td>
                                             <a href="javascript:void(0);" class="action-icon" title="Xem"> <i class="mdi mdi-eye"></i></a>
                                             <a href="javascript:void(0);" class="action-icon" title="Sửa"> <i class="mdi mdi-square-edit-outline"></i></a>
@@ -154,7 +164,7 @@
                             <span class="text-danger">Không có dữ liệu</span>
                         @endif
 
-                        @dump($selectedIDs)
+                        
                     </div>
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
@@ -173,17 +183,18 @@
                 <div class="modal-body">
 
                     <form action="#" class="px-3">
-
                         <div class="mb-3">
-                            <label for="emailaddress1" class="form-label">Email address</label>
-                            <input class="form-control" type="email" id="emailaddress1" required="" placeholder="john@deo.com">
+                            <label for="name" class="form-label">
+                                Tên danh mục:
+                                <span class="text-danger opacity-75">*</span>
+                            </label>
+                            <input class="form-control" type="email" id="name" required="" placeholder="john@deo.com">
                         </div>
 
                         <div class="mb-3">
-                            <label for="password1" class="form-label">Password</label>
-                            <input class="form-control" type="password" required="" id="password1" placeholder="Enter your password">
+                            <label for="example-fileinput" class="form-label">Hình danh mục:</label>
+                            <input type="file" id="example-fileinput" class="form-control">
                         </div>
-
                     </form>
 
                 </div>

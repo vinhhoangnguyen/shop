@@ -32,18 +32,17 @@ class ShowCategory extends Component
         $this->resetPage();
     }
 
+    //Checkbox SelectAll
     public function updatedSelectPageRows($value){
        if ($value) {
             $this->selectedIDs = $this->category->pluck('id')->map(function($id){
                 return (String)$id;
             });
-            // $this->selectedIDs = $this->category->pluck('id');
-           
+            
        }else{
             $this->selectedIDs = [];
     
        }    
-
     }
 
     public function updatedSelectedIDs($values){
@@ -65,9 +64,13 @@ class ShowCategory extends Component
             $this->sortDirect = ($this->sortDirect === 'desc') ? 'asc' : 'desc';
             return;
         }
-
         $this->sortColumn = $column;
         $this->sortDirect = 'desc';
+    }
+
+    //Bulk Action: coming soon...
+    public function deleteMultiID(){
+        dd('Thao tác xoá: '.count($this->selectedIDs).' muc');
     }
 
     public function render()
@@ -77,11 +80,5 @@ class ShowCategory extends Component
             'data' => $categories
         ]);
     
-        // return view('livewire.category.show-category', [
-        //     'data' => Category::search($this->search)
-        //     ->orderBy($this->sortColumn, $this->sortDirect)
-        //     ->paginate($this->perPage)
-        // ]);
-
     }
 }

@@ -172,38 +172,7 @@
     </div>
     <!-- end row -->
 
-    <!-- Standard Modal content -->
-    <div id="standard-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="standard-modalLabel">Thêm danh mục</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-
-                    <form action="#" class="px-3">
-                        <div class="mb-3">
-                            <label for="name" class="form-label">
-                                Tên danh mục:
-                                <span class="text-danger opacity-75">*</span>
-                            </label>
-                            <input class="form-control" type="email" id="name" required="" placeholder="john@deo.com">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="example-fileinput" class="form-label">Hình danh mục:</label>
-                            <input type="file" id="example-fileinput" class="form-control">
-                        </div>
-                    </form>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-primary">Lưu</button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+   {{-- <livewire:category.create-category /> --}}
+    
 
 </div> <!-- container -->

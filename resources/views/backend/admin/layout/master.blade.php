@@ -567,7 +567,11 @@
             });
         </script>
 
-
+        <script>
+            document.addEventListener('item-created', (event) => {
+                $('#standard-modal').modal('toggle');
+            });
+        </script>
 
     </body>
 </html>

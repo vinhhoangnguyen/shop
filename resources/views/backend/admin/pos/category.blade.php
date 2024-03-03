@@ -4,6 +4,6 @@
     <!-- Start Content-->
     {{-- Livewire_content --}}
     <livewire:category.show-category />
-    <livewire:category.create-category @item-created="$refresh" />
+    <livewire:category.create-category />
 </div> <!-- content -->
 @endsection

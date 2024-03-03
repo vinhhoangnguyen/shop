@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Category;
 use Livewire\WithPagination;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\On;
 
 class ShowCategory extends Component
 {
@@ -32,17 +33,24 @@ class ShowCategory extends Component
         $this->resetPage();
     }
 
+
+    #[On('item-created')]
+    #[On('items-deleted')]
+    public function refresh(){
+        $this->resetPage();
+    }
+
     //Checkbox SelectAll
     public function updatedSelectPageRows($value){
        if ($value) {
             $this->selectedIDs = $this->category->pluck('id')->map(function($id){
                 return (String)$id;
             });
-            
+
        }else{
             $this->selectedIDs = [];
-    
-       }    
+
+       }
     }
 
     public function updatedSelectedIDs($values){
@@ -70,7 +78,21 @@ class ShowCategory extends Component
 
     //Bulk Action: coming soon...
     public function deleteMultiID(){
-        dd('Thao tác xoá: '.count($this->selectedIDs).' muc');
+        $this->dispatch('items-multiDelete', ['items' =>$this->selectedIDs ]);
+    }
+
+    #[On('confirmed-multiDelete')]
+    public function confirm_deleteMultiID($array_items){
+        // Category::whereIn('id', $array_items)->delete();
+        foreach ($array_items as $category) {
+            $item = Category::findOrFail($category);
+            if ($item->image) {
+                unlink($item->image);
+            }
+            $item->delete();
+        }
+        $this->selectedIDs = [];
+        $this->dispatch('items-deleted');
     }
 
     public function render()
@@ -79,6 +101,6 @@ class ShowCategory extends Component
         return view('livewire.category.show-category', [
             'data' => $categories
         ]);
-    
+
     }
 }

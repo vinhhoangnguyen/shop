@@ -54,7 +54,7 @@
                                         <span class="btn-label"><i class="mdi mdi-delete"></i></span>{{count($selectedIDs)}}
                                     </button>
                                 </div>
-                                    
+
                                 @endif
 
 
@@ -63,7 +63,7 @@
                         <div class="col-lg-4">
                             <div class="text-lg-end">
                                 <!-- Modal -->
-                                <button type="button" class="btn btn-info waves-effect waves-light mb-2 me-2" data-bs-toggle="modal" data-bs-target="#standard-modal"><i class="mdi mdi-plus-circle me-1"></i> Thêm danh mục</button>
+                                <button type="button" class="btn btn-info waves-effect waves-light mb-2 me-2" data-bs-toggle="modal" data-bs-target="#create-modal"><i class="mdi mdi-plus-circle me-1"></i> Thêm danh mục</button>
                                 <button type="button" class="btn btn-light waves-effect mb-2">Nhập</button>
                                 <button type="button" class="btn btn-light waves-effect mb-2">Xuất</button>
                             </div>
@@ -94,7 +94,7 @@
                                             <label  class="form-check-label" for="customCheckAll">
                                                 <span>STT
                                                 </span>
-                                            
+
                                             </label>
                                         </div>
                                     </th>
@@ -137,7 +137,7 @@
                                         </td>
                                         <td>{{ $item->id }}</td>
                                         <td class="table-user">
-                                            <img src="{{ $item->image }}" alt="table-user" class="me-2 rounded-circle">
+                                            <img src="{{ asset($item->image) }}" alt="table-user" class="me-2 rounded-circle">
                                             <a href="javascript:void(0);" class="text-body fw-semibold">{{ $item->name }}</a>
                                         </td>
                                         <td>
@@ -164,7 +164,7 @@
                             <span class="text-danger">Không có dữ liệu</span>
                         @endif
 
-                        
+
                     </div>
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
@@ -172,7 +172,48 @@
     </div>
     <!-- end row -->
 
+   {{-- <livewire:category.create-category @item-created="$refresh"> --}}
    {{-- <livewire:category.create-category /> --}}
-    
 
 </div> <!-- container -->
+{{--
+@script
+<script>
+    $wire.on('items-multiDelete', (event) => {
+        const array_items = event;
+        // const number_items = array_items.length;
+        alert(array_items);
+    });
+</script>
+@endscript --}}
+
+<script>
+    document.addEventListener('livewire:initialized', () => {
+        Livewire.on('items-multiDelete', (event) => {
+            const number_items = event[0]['items'].length;
+            const array_items = event[0]['items'];
+            Swal.fire({
+                title: "Bạn có chắc chắn muốn xoá " + number_items + " mục?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Đồng ý!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        alert(array_items);
+                        Livewire.dispatch('confirmed-multiDelete', {'array_items' : array_items});
+
+                        Livewire.on('items-deleted', (event) => {});
+                            Swal.fire({
+                            title: "Xoá thành công!",
+                            text: "Dữ liệu bạn chọn đã được xoá.",
+                            icon: "success"
+                        });
+                    }
+            });
+
+
+       });
+    });
+</script>

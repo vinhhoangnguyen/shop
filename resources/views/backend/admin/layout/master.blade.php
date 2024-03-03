@@ -542,36 +542,52 @@
                             timer: 1500
                         });
                         break;
-
-                    case "delete":
-                        Swal.fire({
-                            title: "Bạn có chắc chắn muốn xoá?",
-                            // text: "You won't be able to revert this!",
-                            icon: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#3085d6",
-                            cancelButtonColor: "#d33",
-                            confirmButtonText: "Vâng, xoá!"
-                            }).then((result) => {
-                            if (result.isConfirmed) {
-                                Swal.fire({
-                                title: "Xoá thành công!",
-                                text: "Dữ liệu bạn chọn đã được xoá.",
-                                icon: "success"
-                                });
-                            }
-                        });
-                        break;
                 }
 
             });
         </script>
 
         <script>
-            document.addEventListener('item-created', (event) => {
-                $('#standard-modal').modal('toggle');
+            document.addEventListener('close-modal', (event) => {
+                $('#create-modal').modal('hide');
             });
         </script>
+
+        {{-- <script>
+            document.addEventListener('items-multiDelete', (event) => {
+
+                        const array_items = event.detail.items;
+                        let number_items = array_items.length;
+                        Swal.fire({
+                                    title: "Bạn có chắc chắn muốn xoá " + number_items + " mục?",
+                                    // text: "You won't be able to revert this!",
+                                    icon: "warning",
+                                    showCancelButton: true,
+                                    confirmButtonColor: "#3085d6",
+                                    cancelButtonColor: "#d33",
+                                    confirmButtonText: "Đồng ý xoá!"
+                                    }).then((result) => {
+                                    if (result.isConfirmed) {
+
+                                        // $this->dispatch('confirmed-multiDelete', {items: array_items});
+
+                                        // $this.dispatch('confirmed-multiDelete', {items: array_items});
+                                        @wire.dispatch('confirmed-multiDelete');
+                                        // @wire.dispatch('confirmed-multiDelete');
+                                        // $wire->dispatch('confirmed-multiDelete');
+
+                                        // Swal.fire({
+                                        // title: "Xoá thành công!",
+                                        // text: "Dữ liệu bạn chọn đã được xoá.",
+                                        // icon: "success"
+                                        // });
+                                    }
+                                });
+                    });
+
+        </script> --}}
+
+
 
     </body>
 </html>

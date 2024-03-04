@@ -35,7 +35,7 @@ class ShowCategory extends Component
 
 
     #[On('item-created')]
-    #[On('items-deleted')]
+
     public function refresh(){
         $this->resetPage();
     }
@@ -76,7 +76,6 @@ class ShowCategory extends Component
         $this->sortDirect = 'desc';
     }
 
-    //Bulk Action: coming soon...
     public function deleteMultiID(){
         $this->dispatch('items-multiDelete', ['items' =>$this->selectedIDs ]);
     }
@@ -95,6 +94,7 @@ class ShowCategory extends Component
         $this->dispatch('items-deleted');
     }
 
+    // #[On('items-deleted')]
     public function render()
     {
         $categories = $this->category;

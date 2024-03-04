@@ -25,8 +25,8 @@ class CreateCategory extends Component
 
     public function rules(){
         return [
-            'name' =>'required | Unique:categories',
-            'image' =>'nullable|image|Unique:categories,image|max:2048',
+            'name' =>'required|Unique:categories',
+            'image' =>'nullable|image|max:2048',
         ];
 
     }
@@ -64,7 +64,7 @@ class CreateCategory extends Component
         $category = new Category();
         $image = $this->image;
         if ($image) {
-            $image_name = date('dmY').'_'.$image->getClientOriginalName();
+            $image_name = date('dmY_His').'_'.$image->getClientOriginalName();
             Image::make($image)->resize(300,300)->save('backend/upload/pos/category/'.$image_name);
             $image_url = 'backend/upload/pos/category/'.$image_name;
             $category->image = $image_url;

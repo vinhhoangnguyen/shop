@@ -42,7 +42,7 @@
                                 </div>
 
                                 @if (count($selectedIDs) > 0)
-                                <div class="d-flex gap-2 align-items-center">
+                                {{-- <div class="d-flex gap-2 align-items-center">
 
                                     <label for="status-select" class="">Mục chọn: </label>
                                     <div class="me-sm-2">
@@ -53,7 +53,22 @@
                                     <button wire:click.prevent="deleteMultiID" type="button" class="btn btn-danger waves-effect waves-light" title="Xoá">
                                         <span class="btn-label"><i class="mdi mdi-delete"></i></span>{{count($selectedIDs)}}
                                     </button>
+                                </div> --}}
+
+                             <!-- Example split danger button -->
+                             <div class="btn-group mb-2 dropend">
+                                <button type="button" class="btn btn-success waves-effect waves-light">
+                                    Thao tác {{count($selectedIDs)}} mục chọn
+                                </button>
+                                <button type="button" class="btn btn-success waves-effect waves-light dropdown-toggle-split dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="mdi mdi-chevron-right"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a  class="dropdown-item" >Chuyển trạng thái</a>
+                                    <a wire:click.prevent="deleteMultiID"  class="dropdown-item">Xoá</a>
+
                                 </div>
+                            </div>
 
                                 @endif
 
@@ -131,13 +146,13 @@
                                     <tr wire:key="{{ $item->id }}">
                                         <td>
                                             <div class="form-check">
-                                                <input type="checkbox" wire:model.live="selectedIDs" value="{{$item->id}}" class="form-check-input" id="customCheckID">
-                                                <label class="form-check-label" for="customCheckID">{{ $key+ $data->firstItem()}} </label>
+                                                <input type="checkbox" wire:model.live="selectedIDs" value="{{$item->id}}" class="form-check-input" id="customCheck{{$item->id}}">
+                                                <label class="form-check-label" for="customCheck{{$item->id}}">{{ $key+ $data->firstItem()}} </label>
                                             </div>
                                         </td>
                                         <td>{{ $item->id }}</td>
                                         <td class="table-user">
-                                            <img src="{{ asset($item->image) }}" alt="table-user" class="me-2 rounded-circle">
+                                            <img src="{{ ($item->image)? asset($item->image): asset('backend/upload/no_image.jpg') }}" alt="No Image" class="me-2 rounded-circle">
                                             <a href="javascript:void(0);" class="text-body fw-semibold">{{ $item->name }}</a>
                                         </td>
                                         <td>
@@ -176,16 +191,8 @@
    {{-- <livewire:category.create-category /> --}}
 
 </div> <!-- container -->
-{{--
-@script
-<script>
-    $wire.on('items-multiDelete', (event) => {
-        const array_items = event;
-        // const number_items = array_items.length;
-        alert(array_items);
-    });
-</script>
-@endscript --}}
+
+
 
 <script>
     document.addEventListener('livewire:initialized', () => {
@@ -201,7 +208,7 @@
                 confirmButtonText: "Đồng ý!"
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        alert(array_items);
+
                         Livewire.dispatch('confirmed-multiDelete', {'array_items' : array_items});
 
                         Livewire.on('items-deleted', (event) => {});

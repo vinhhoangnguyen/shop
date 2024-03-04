@@ -525,7 +525,7 @@
                 switch (alert_type) {
                     case "success":
                         Swal.fire({
-                            position: "top-end",
+                            position: "bottom-end",
                             icon: alert_type,
                             title: message,
                             showConfirmButton: false,

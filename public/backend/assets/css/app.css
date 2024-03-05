@@ -8725,3 +8725,9 @@ span.flatpickr-weekday,
   font-family: "Material Design Icons";
   position: absolute;
 }
+
+/* .form-check.form-check-md .form-check-input {
+  height: 3rem;
+  width: calc(2rem + 0.75rem);
+  border-radius: 3rem;
+} */

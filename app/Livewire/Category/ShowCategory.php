@@ -80,6 +80,10 @@ class ShowCategory extends Component
         $this->dispatch('items-multiDelete', ['items' =>$this->selectedIDs ]);
     }
 
+    public function switchMultiID(){
+        $this->dispatch('items-multiSwitch', ['items' =>$this->selectedIDs ]);
+    }
+
     #[On('confirmed-multiDelete')]
     public function confirm_deleteMultiID($array_items){
         // Category::whereIn('id', $array_items)->delete();
@@ -92,6 +96,19 @@ class ShowCategory extends Component
         }
         $this->selectedIDs = [];
         $this->dispatch('items-deleted');
+    }
+
+    #[On('confirmed-multiSwitch')]
+    public function confirm_switchMultiID($array_items){
+        // Category::whereIn('id', $array_items)->delete();
+        foreach ($array_items as $category) {
+            $item = Category::findOrFail($category);
+            $item->status = ($item->status == 1) ? 0 : 1;
+            $item->save();
+        }
+        $this->selectedIDs = [];
+        
+        $this->dispatch('items-switched');
     }
 
     // #[On('items-deleted')]

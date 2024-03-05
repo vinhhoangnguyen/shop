@@ -64,7 +64,7 @@
                                     <i class="mdi mdi-chevron-right"></i>
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a  class="dropdown-item" >Chuyển trạng thái</a>
+                                    <a wire:click.prevent="switchMultiID" class="dropdown-item" >Chuyển trạng thái</a>
                                     <a wire:click.prevent="deleteMultiID"  class="dropdown-item">Xoá</a>
 
                                 </div>
@@ -103,18 +103,18 @@
                         <table class="table table-centered table-striped dt-responsive nowrap w-100" id="products-datatable">
                             <thead>
                                 <tr>
-                                    <th style="width: 100px;">
+                                    <th style="width: 50px;">
                                         <div class="form-check">
-                                            <input type="checkbox" wire:model.live="selectPageRows" class="form-check-input" id="customCheckAll">
+                                            <input type="checkbox" wire:model.live="selectPageRows" class="form-check-input" id="customCheckAll" style="width:25px;height:25px">
                                             <label  class="form-check-label" for="customCheckAll">
-                                                <span>STT
+                                                <span>
                                                 </span>
 
                                             </label>
                                         </div>
                                     </th>
 
-                                    <th class="p-1">
+                                    <th class="p-1" style="width: 100px;">
                                         <x-datatable-items columnName="id" :sortColumn="$sortColumn" :sortDirect="$sortDirect">
                                             <div>Mã</div>
                                         </x-datatable-items>
@@ -122,6 +122,12 @@
                                     <th class="p-1">
                                         <x-datatable-items columnName="name" :sortColumn="$sortColumn" :sortDirect="$sortDirect">
                                             <div>Danh mục</div>
+                                        </x-datatable-items>
+                                    </th>
+
+                                    <th class="p-1">
+                                        <x-datatable-items columnName="slug" :sortColumn="$sortColumn" :sortDirect="$sortDirect">
+                                            <div>Slug</div>
                                         </x-datatable-items>
                                     </th>
 
@@ -145,9 +151,9 @@
                                 @foreach ($data as $key => $item)
                                     <tr wire:key="{{ $item->id }}">
                                         <td>
-                                            <div class="form-check">
-                                                <input type="checkbox" wire:model.live="selectedIDs" value="{{$item->id}}" class="form-check-input" id="customCheck{{$item->id}}">
-                                                <label class="form-check-label" for="customCheck{{$item->id}}">{{ $key+ $data->firstItem()}} </label>
+                                            <div class="form-check form-check-md">
+                                                <input type="checkbox" wire:model.live="selectedIDs" value="{{$item->id}}" class="form-check-input" id="customCheck{{$item->id}}" style="width:20px;height:20px">
+                                                {{-- <label class="form-check-label" for="customCheck{{$item->id}}">{{ $key+ $data->firstItem()}} </label> --}}
                                             </div>
                                         </td>
                                         <td>{{ $item->id }}</td>
@@ -155,11 +161,15 @@
                                             <img src="{{ ($item->image)? asset($item->image): asset('backend/upload/no_image.jpg') }}" alt="No Image" class="me-2 rounded-circle">
                                             <a href="javascript:void(0);" class="text-body fw-semibold">{{ $item->name }}</a>
                                         </td>
+
+                                        <td >
+                                            <a href="javascript:void(0);" class="text-body fw-semibold">{{ $item->slug }}</a>
+                                        </td>
                                         <td>
                                             @if ($item->status == 1)
                                                 <span class="badge badge-soft-success">Hoạt động</span>
                                             @else
-                                                <span class="badge badge-soft-success">Ngưng</span>
+                                                <span class="badge badge-soft-danger">Ngưng</span>
                                             @endif
                                         </td>
 
@@ -219,8 +229,32 @@
                         });
                     }
             });
-
-
        });
+
+       Livewire.on('items-multiSwitch', (event) => {
+            const number_items = event[0]['items'].length;
+            const array_items = event[0]['items'];
+            Swal.fire({
+                title: "Bạn có chắc chắn muốn chuyển trạng thái " + number_items + " mục?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Đồng ý!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        Livewire.dispatch('confirmed-multiSwitch', {'array_items' : array_items});
+
+                        Livewire.on('items-switched', (event) => {});
+                            Swal.fire({
+                            title: "Chuyển trạng thái thành công!",
+                            text: "Dữ liệu bạn chọn đã được chuyển trạng thái.",
+                            icon: "success"
+                        });
+                    }
+            });
+       });
+
     });
 </script>

@@ -4,6 +4,11 @@ namespace App\Livewire\Category;
 
 use Livewire\Component;
 use App\Models\Category;
+
+use App\Exports\CategoriesExport;
+use Maatwebsite\Excel\Facades\Excel;
+
+
 use Livewire\WithPagination;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
@@ -82,6 +87,10 @@ class ShowCategory extends Component
 
     public function switchMultiID(){
         $this->dispatch('items-multiSwitch', ['items' =>$this->selectedIDs ]);
+    }
+
+    public function exportMultiID(){
+        return (new CategoriesExport($this->selectedIDs))->download('Categories.xlsx');
     }
 
     #[On('confirmed-multiDelete')]

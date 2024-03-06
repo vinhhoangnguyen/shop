@@ -64,10 +64,10 @@
                                     <i class="mdi mdi-chevron-right"></i>
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a wire:click.prevent="switchMultiID" class="dropdown-item" >Chuyển trạng thái (Ngưng/Hoạt động)</a>
-                                    <a wire:click.prevent="exportMultiID" class="dropdown-item" >Xuất File Excel</a>
+                                    <a wire:click.prevent="switchMultiID" class="dropdown-item" ><i class="mdi mdi-autorenew"></i> Chuyển trạng thái </a>
+                                    <a wire:click.prevent="exportMultiID" class="dropdown-item" ><i class="mdi mdi-file-upload-outline"></i> Xuất Excel</a>
                                     <li><hr class="dropdown-divider"></li>
-                                    <a wire:click.prevent="deleteMultiID"  class="dropdown-item">Xoá</a>
+                                    <a wire:click.prevent="deleteMultiID"  class="dropdown-item"><i class="mdi mdi-delete-forever"></i> Xoá</a>
 
                                 </div>
                             </div>
@@ -81,8 +81,8 @@
                             <div class="text-lg-end">
                                 <!-- Modal -->
                                 <button type="button" class="btn btn-info waves-effect waves-light mb-2 me-2" data-bs-toggle="modal" data-bs-target="#create-modal"><i class="mdi mdi-plus-circle me-1"></i> Thêm danh mục</button>
-                                <button type="button" class="btn btn-light waves-effect mb-2">Nhập</button>
-                                <button type="button" class="btn btn-light waves-effect mb-2">Xuất</button>
+                                <button type="button" class="btn btn-light waves-effect mb-2"> <i class="mdi mdi-arrow-collapse-down"></i> Nhập</button>
+                                <button wire:click.prevent="exportAll" type="button" class="btn btn-light waves-effect mb-2"><i class="mdi mdi-arrow-collapse-up"></i> Xuất</button>
                             </div>
                         </div><!-- end col-->
                     </div>

@@ -93,6 +93,10 @@ class ShowCategory extends Component
         return (new CategoriesExport($this->selectedIDs))->download('Categories.xlsx');
     }
 
+    public function exportAll(){
+        return (new CategoriesExport())->download('Categories.xlsx');
+    }
+
     #[On('confirmed-multiDelete')]
     public function confirm_deleteMultiID($array_items){
         // Category::whereIn('id', $array_items)->delete();

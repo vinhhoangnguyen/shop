@@ -6,6 +6,7 @@ use Livewire\Attributes\Validate;
 // use Livewire\Attributes\Rule;
 use Livewire\Component;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 use Livewire\WithFileUploads;
 use Image;
 use Illuminate\Support\Str;
@@ -48,16 +49,6 @@ class CreateCategory extends Component
         $this->iteration++;
     }
 
-    // public function updatedImage($value){
-    //     // dd($value);
-    //     // 1. validate image
-    //     $validateImage = $this->validate([
-    //         'image' => 'image',
-    //     ]);
-
-    //         dd($validateImage);
-    // }
-
     public function save(){
         $this->validate();
 
@@ -72,6 +63,8 @@ class CreateCategory extends Component
 
         $category->name = $this->name;
         $category->slug = Str::slug($this->name);
+        $category->created_by = Auth::user()->role;
+        $category->updated_by = Auth::user()->role;
 
         try {
             $category->save();

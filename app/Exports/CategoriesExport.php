@@ -18,14 +18,38 @@ class CategoriesExport implements FromQuery, ShouldAutoSize, WithStrictNullCompa
     use Exportable;
     protected $selectedMultiID;
 
-    public function __construct($selectedMultiID){
-        
-        $this->selectedMultiID = $selectedMultiID;
+    public function __construct($selectedMultiID = null)
+    {
+        if ($selectedMultiID == null) {
+            $this->selectedMultiID = Category::pluck('id')->toArray();
+        } else {
+            $this->selectedMultiID = $selectedMultiID;
+        }
     }
     
     public function query()
     {
         return Category::whereIn('id', $this->selectedMultiID);
+        
+        // $categories = Category::whereIn('id', $this->selectedMultiID)->get();
+        
+        // $numberedCategories = [];
+        // foreach ($categories as $key => $category) {
+        //     $numberedCategories[] = [
+        //         '#' => $key + 1,
+        //         'Mã' => $category->id,
+        //         'Tên danh mục' => $category->name,
+        //         'Slug danh mục' => $category->slug,
+        //         'Hình ảnh' => $category->image,
+        //         'Trạng thái' => $category->status,
+        //         'Người tạo' => $category->created_by,
+        //         'Người cập nhật' => $category->updated_by,
+        //         'Thời gian tạo' => $category->created_at,
+        //         'Thời gian cập nhật' => $category->updated_at,
+        //     ];
+        // }
+       
+        // return collect($numberedCategories);
     }
 
     public function headings(): array

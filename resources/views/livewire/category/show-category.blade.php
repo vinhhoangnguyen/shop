@@ -81,7 +81,8 @@
                             <div class="text-lg-end">
                                 <!-- Modal -->
                                 <button type="button" class="btn btn-info waves-effect waves-light mb-2 me-2" data-bs-toggle="modal" data-bs-target="#create-modal"><i class="mdi mdi-plus-circle me-1"></i> Thêm danh mục</button>
-                                <button type="button" class="btn btn-light waves-effect mb-2"> <i class="mdi mdi-arrow-collapse-down"></i> Nhập</button>
+                                <button type="button" class="btn btn-light waves-effect mb-2" data-bs-toggle="modal" data-bs-target="#scrollable-modal"> <i class="mdi mdi-arrow-collapse-down"></i> Nhập</button>
+                               
                                 <button wire:click.prevent="exportAll" type="button" class="btn btn-light waves-effect mb-2"><i class="mdi mdi-arrow-collapse-up"></i> Xuất</button>
                             </div>
                         </div><!-- end col-->
@@ -202,10 +203,43 @@
    {{-- <livewire:category.create-category @item-created="$refresh"> --}}
    {{-- <livewire:category.create-category /> --}}
 
+
+
+ <!-- Long Content Scroll Modal -->
+    <div class="modal fade" id="scrollable-modal" tabindex="-1" role="dialog"
+ aria-labelledby="scrollableModalTitle" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-full-width" role="document">
+     <div class="modal-content">
+         <div class="modal-header">
+            {{-- <div class="modal-title">
+                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas
+                    eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas
+                    eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                
+            </div> --}}
+             <h1 class="modal-title" id="scrollableModalTitle">
+                Modal title
+             </h1>
+             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+             <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas
+                 eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+             <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas
+                 eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+             
+             
+         </div>
+         <div class="modal-footer">
+             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+             <button type="button" class="btn btn-primary">Save changes</button>
+         </div>
+     </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->  
+
 </div> <!-- container -->
-
-
-
 <script>
     document.addEventListener('livewire:initialized', () => {
         Livewire.on('items-multiDelete', (event) => {

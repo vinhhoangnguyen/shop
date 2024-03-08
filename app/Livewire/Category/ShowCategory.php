@@ -12,10 +12,13 @@ use Maatwebsite\Excel\Facades\Excel;
 use Livewire\WithPagination;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
+use Livewire\WithFileUploads;
+use Livewire\Attributes\Validate;
 
 class ShowCategory extends Component
 {
     use WithPagination;
+    use WithFileUploads;
 
     public $search='';
     public $perPage = 10;
@@ -26,6 +29,8 @@ class ShowCategory extends Component
     public $selectedIDs = [];
     public $selectPageRows = false;
 
+    #[Validate('required')] 
+    public $fileViewImport;
 
     //Lifecycle Hook
     public function updatedSearch()
@@ -97,6 +102,11 @@ class ShowCategory extends Component
         return (new CategoriesExport())->download('Categories.xlsx');
     }
 
+    public function uploadFileView(){
+        // dd('123');
+        $this->validate();
+    }
+
     #[On('confirmed-multiDelete')]
     public function confirm_deleteMultiID($array_items){
         // Category::whereIn('id', $array_items)->delete();
@@ -131,6 +141,7 @@ class ShowCategory extends Component
         return view('livewire.category.show-category', [
             'data' => $categories
         ]);
-
     }
+
+
 }

@@ -31,6 +31,10 @@
 {{-- Toast CSS --}}
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
 
+
+<link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css" />
+  
+
     </head>
 
     <!-- body start -->
@@ -488,6 +492,7 @@
         {{-- Validation Form js --}}
         <script src="{{ asset('backend/assets/js/validate.min.js') }}"></script>
 
+        <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
 
         {{-- Toastr JS - Sweet Alert JS --}}
 
@@ -553,40 +558,30 @@
             });
         </script>
 
-        {{-- <script>
-            document.addEventListener('items-multiDelete', (event) => {
+        {{-- DataTable for View Data Export from file input --}}
+        <script>            
+            $(document).ready( function () {
+                // $('#tableExportView').DataTable();
+                $('#tableExportView').DataTable({
+                    // responsive: {
+                    //     details: {
+                    //         display: DataTable.Responsive.display.modal({
+                    //             header: function (row) {
+                    //                 var data = row.data();
+                    //                 return 'Details for ' + data[0] + ' ' + data[1];
+                    //             }
+                    //         }),
+                    //         renderer: DataTable.Responsive.renderer.tableAll({
+                    //             tableClass: 'table'
+                    //         })
+                    //     }
+                    // }
+                });
+            });
 
-                        const array_items = event.detail.items;
-                        let number_items = array_items.length;
-                        Swal.fire({
-                                    title: "Bạn có chắc chắn muốn xoá " + number_items + " mục?",
-                                    // text: "You won't be able to revert this!",
-                                    icon: "warning",
-                                    showCancelButton: true,
-                                    confirmButtonColor: "#3085d6",
-                                    cancelButtonColor: "#d33",
-                                    confirmButtonText: "Đồng ý xoá!"
-                                    }).then((result) => {
-                                    if (result.isConfirmed) {
+        </script>
 
-                                        // $this->dispatch('confirmed-multiDelete', {items: array_items});
-
-                                        // $this.dispatch('confirmed-multiDelete', {items: array_items});
-                                        @wire.dispatch('confirmed-multiDelete');
-                                        // @wire.dispatch('confirmed-multiDelete');
-                                        // $wire->dispatch('confirmed-multiDelete');
-
-                                        // Swal.fire({
-                                        // title: "Xoá thành công!",
-                                        // text: "Dữ liệu bạn chọn đã được xoá.",
-                                        // icon: "success"
-                                        // });
-                                    }
-                                });
-                    });
-
-        </script> --}}
-
+        
 
 
     </body>

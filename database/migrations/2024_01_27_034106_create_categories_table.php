@@ -11,19 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('slug')->nullable();
-            $table->string('photo')->nullable();
-            $table->string('email')->unique()->nullable();
-            $table->string('phone')->unique();
-            $table->string('password');
-            $table->text('address')->nullable();
-            $table->string('role')->nullable()->default('customer');
+            $table->string('image')->nullable();
             $table->boolean('status')->default(true)->comment('0 is disable and 1 enable');
-            $table->timestamp('email_verified_at')->nullable();
-            $table->rememberToken();
+            $table->string('created_by')->nullable();
+            $table->string('updated_by')->nullable();
             $table->timestamps();
         });
     }
@@ -33,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('categories');
     }
 };

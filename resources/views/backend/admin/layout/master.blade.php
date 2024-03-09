@@ -31,6 +31,10 @@
 {{-- Toast CSS --}}
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
 
+
+<link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css" />
+  
+
     </head>
 
     <!-- body start -->
@@ -488,10 +492,12 @@
         {{-- Validation Form js --}}
         <script src="{{ asset('backend/assets/js/validate.min.js') }}"></script>
 
+        <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
 
-        {{-- Toastr JS --}}
+        {{-- Toastr JS - Sweet Alert JS --}}
 
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <script>
             @if(Session::has('message'))
@@ -516,6 +522,66 @@
             @endif
         </script>
 
+        <script>
+            document.addEventListener('alert', (event) => {
+                // alert(event['detail'][0]['message']);
+                const alert_type = event['detail'][0]['alert-type'];
+                const message = event['detail'][0]['message'];
+                switch (alert_type) {
+                    case "success":
+                        Swal.fire({
+                            position: "bottom-end",
+                            icon: alert_type,
+                            title: message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        break;
+
+                    case "error":
+                        Swal.fire({
+                            position: "top-end",
+                            icon: alert_type,
+                            title: message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        break;
+                }
+
+            });
+        </script>
+
+        <script>
+            document.addEventListener('close-modal', (event) => {
+                $('#create-modal').modal('hide');
+            });
+        </script>
+
+        {{-- DataTable for View Data Export from file input --}}
+        <script>            
+            $(document).ready( function () {
+                // $('#tableExportView').DataTable();
+                $('#tableExportView').DataTable({
+                    // responsive: {
+                    //     details: {
+                    //         display: DataTable.Responsive.display.modal({
+                    //             header: function (row) {
+                    //                 var data = row.data();
+                    //                 return 'Details for ' + data[0] + ' ' + data[1];
+                    //             }
+                    //         }),
+                    //         renderer: DataTable.Responsive.renderer.tableAll({
+                    //             tableClass: 'table'
+                    //         })
+                    //     }
+                    // }
+                });
+            });
+
+        </script>
+
+        
 
 
     </body>

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Models\User;
 
+use App\Models\setting;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Image;
@@ -16,6 +18,10 @@ class AdminController extends Controller
 {
     //Dashboard index
     public function index(){
+        // $setting = Setting::where('id', 1)->first();
+
+        // $string = "pass data from admincontroller";
+
         return view('backend.admin.dashboard');
     }//end method
 

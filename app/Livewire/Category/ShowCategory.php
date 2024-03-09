@@ -6,7 +6,9 @@ use Livewire\Component;
 use App\Models\Category;
 
 use App\Exports\CategoriesExport;
+use App\Imports\CategoriesImport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Collection;
 
 
 use Livewire\WithPagination;
@@ -29,8 +31,15 @@ class ShowCategory extends Component
     public $selectedIDs = [];
     public $selectPageRows = false;
 
-    #[Validate('required')] 
+    public $iteration;
+
+
+
+    #[Validate('required', message: 'Vui lòng chọn file excel để cập nhật.')]
+    #[Validate('Mimes:xls,xlsx', message: 'Vui lòng chọn file excel để cập nhật.')]
     public $fileViewImport;
+
+    public $collectImport = [];
 
     //Lifecycle Hook
     public function updatedSearch()
@@ -103,8 +112,11 @@ class ShowCategory extends Component
     }
 
     public function uploadFileView(){
-        // dd('123');
         $this->validate();
+
+        $this->collectImport = Excel::toCollection(new CategoriesImport, $this->fileViewImport);
+
+        //dd($this->collectImport);
     }
 
     #[On('confirmed-multiDelete')]
@@ -130,7 +142,7 @@ class ShowCategory extends Component
             $item->save();
         }
         $this->selectedIDs = [];
-        
+
         $this->dispatch('items-switched');
     }
 

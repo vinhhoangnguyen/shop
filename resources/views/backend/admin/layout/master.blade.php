@@ -33,7 +33,7 @@
 
 
 <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css" />
-  
+
 
     </head>
 
@@ -559,29 +559,24 @@
         </script>
 
         {{-- DataTable for View Data Export from file input --}}
-        <script>            
+        <script>
             $(document).ready( function () {
                 // $('#tableExportView').DataTable();
                 $('#tableExportView').DataTable({
-                    // responsive: {
-                    //     details: {
-                    //         display: DataTable.Responsive.display.modal({
-                    //             header: function (row) {
-                    //                 var data = row.data();
-                    //                 return 'Details for ' + data[0] + ' ' + data[1];
-                    //             }
-                    //         }),
-                    //         renderer: DataTable.Responsive.renderer.tableAll({
-                    //             tableClass: 'table'
-                    //         })
-                    //     }
-                    // }
+                    "language": {
+                        "lengthMenu": "Trình bày _MENU_ dòng",
+                        "zeroRecords": "Chưa có bản ghi",
+                        "info": "Trình bày _PAGE_ của _PAGES_ (_MAX_ bản ghi)",
+                        "infoEmpty": "Không tìm thấy bản ghi",
+                        "infoFiltered": "(Lọc từ _MAX_ bản ghi)",
+                        "search": "Tìm kiếm"
+                    }
                 });
             });
 
         </script>
 
-        
+
 
 
     </body>

@@ -7,7 +7,7 @@ use App\Models\Category;
 
 use App\Exports\CategoriesExport;
 use Maatwebsite\Excel\Facades\Excel;
-
+use Illuminate\Pagination\Paginator;
 
 use Livewire\WithPagination;
 use Livewire\Attributes\Computed;
@@ -29,8 +29,14 @@ class ShowCategory extends Component
     public $selectedIDs = [];
     public $selectPageRows = false;
 
-    #[Validate('required')] 
+    #[Validate('required', message:'Chọn tập tin dạng excel để tải lên.')] 
+    #[Validate('mimes:xls,xlsx', message:'Chọn tập tin dạng excel để tải lên.')] 
     public $fileViewImport;
+
+    public $headerViewImport = [];
+    public $dataViewImport = [];
+    public $res;
+
 
     //Lifecycle Hook
     public function updatedSearch()
@@ -86,6 +92,7 @@ class ShowCategory extends Component
         $this->sortDirect = 'desc';
     }
 
+    //Bulk Action
     public function deleteMultiID(){
         $this->dispatch('items-multiDelete', ['items' =>$this->selectedIDs ]);
     }
@@ -94,6 +101,7 @@ class ShowCategory extends Component
         $this->dispatch('items-multiSwitch', ['items' =>$this->selectedIDs ]);
     }
 
+    //Export
     public function exportMultiID(){
         return (new CategoriesExport($this->selectedIDs))->download('Categories.xlsx');
     }
@@ -102,10 +110,35 @@ class ShowCategory extends Component
         return (new CategoriesExport())->download('Categories.xlsx');
     }
 
-    public function uploadFileView(){
-        // dd('123');
-        $this->validate();
-    }
+    //Import
+    // public function uploadFileView(){
+       
+    //     $this->validate();
+
+    //     $this->data();
+    // }
+
+
+ 
+    // protected function data(){
+
+    //     $arrayUploadFile = Excel::toArray([],$this->fileViewImport);
+    //     $this->headerViewImport = array_shift($arrayUploadFile[0]);
+    //     $this->dataViewImport = $arrayUploadFile[0];
+
+    //     // $currentPage = $request->page;
+    //     // $perPage = 10;
+        
+    //     // $currentElements = array_slice($this->dataViewImport, 1, $perPage);
+        
+    //     // $res = new Paginator($currentElements, $perPage, 1);
+
+    //     $res = new Paginator($this->dataViewImport, 3, 1);
+
+    //     // dd($res);
+    //     return $res;
+
+    // }
 
     #[On('confirmed-multiDelete')]
     public function confirm_deleteMultiID($array_items){

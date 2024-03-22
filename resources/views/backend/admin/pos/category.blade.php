@@ -5,5 +5,6 @@
     {{-- Livewire_content --}}
     <livewire:category.show-category />
     <livewire:category.create-category />
+     <livewire:category.upload-category />
 </div> <!-- content -->
 @endsection

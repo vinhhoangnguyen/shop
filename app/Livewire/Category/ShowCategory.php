@@ -31,16 +31,6 @@ class ShowCategory extends Component
     public $selectedIDs = [];
     public $selectPageRows = false;
 
-    public $iteration;
-
-
-
-    #[Validate('required', message: 'Vui lòng chọn file excel để cập nhật.')]
-    #[Validate('Mimes:xls,xlsx', message: 'Vui lòng chọn file excel để cập nhật.')]
-    public $fileViewImport;
-
-    public $collectImport = [];
-
     //Lifecycle Hook
     public function updatedSearch()
     {
@@ -53,8 +43,8 @@ class ShowCategory extends Component
     }
 
 
+    #[On('item-imported')]
     #[On('item-created')]
-
     public function refresh(){
         $this->resetPage();
     }
@@ -111,13 +101,6 @@ class ShowCategory extends Component
         return (new CategoriesExport())->download('Categories.xlsx');
     }
 
-    public function uploadFileView(){
-        $this->validate();
-
-        $this->collectImport = Excel::toCollection(new CategoriesImport, $this->fileViewImport);
-
-        //dd($this->collectImport);
-    }
 
     #[On('confirmed-multiDelete')]
     public function confirm_deleteMultiID($array_items){

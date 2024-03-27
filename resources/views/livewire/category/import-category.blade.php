@@ -1,29 +1,4 @@
-{{-- <style>
-    .fixed_header {
-      width: 100%;
-      table-layout: fixed;
-      border-collapse: collapse;
-    }
-    .fixed_header tbody {
-      display: block;
-      width: 100%;
-      overflow: auto;
-      height: 100px;
-    }
-    .fixed_header thead tr {
-      display: block;
-    }
-    .fixed_header thead {
-      background: black;
-      color: #fff;
-    }
-    .fixed_header th,
-    .fixed_header td {
-      padding: 5px;
-      text-align: left;
-      width: 200px;
-    }
-  </style> --}}
+
 <div wire:ignore.self id="viewImport-modal" class="modal fade" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
     <div class="modal-dialog modal-full-width">
         <div class="modal-content">
@@ -65,10 +40,11 @@
                         <table id="tableExportView" class="table" style="width:100%" >
                             <thead class="table-light">
                                 <tr>
-                                    <th>Dòng</th>
+                                    <th>#
                                     @foreach($arrayImport[0][0] as $fieldName)
                                         <th>{{ $fieldName }}</th>
                                     @endforeach
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>

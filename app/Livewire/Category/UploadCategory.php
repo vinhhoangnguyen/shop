@@ -20,6 +20,8 @@ class UploadCategory extends Component
     #[Validate('required')] 
     public $fileExcel;
     
+    public $showData = false;
+   
     // }
     public function uploadFile()
     {
@@ -75,12 +77,18 @@ class UploadCategory extends Component
         return [];
     }
 
+    //Update Excel File to DB
+    public function updateFile(){
+        // dd('Cập nhật');
+        Excel::import(new UsersImport, $this->fileExcel);
+        
+        
+    }
 
     public function render()
     {
         $data = $this->uploadFile();
-        return view('livewire.category.upload-category', [
-                // 'data' => Category::paginate(10)
+        return view('livewire.category.upload-category', [   
                 'data' => $data
         ]);
     }

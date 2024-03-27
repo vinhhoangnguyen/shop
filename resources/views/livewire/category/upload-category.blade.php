@@ -108,7 +108,7 @@
 
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-primary">Cập nhật</button>
+                    <button wire:click.prevent="updateFile" type="button" class="btn btn-primary">Cập nhật</button>
                     </div>
 
                 </form>
